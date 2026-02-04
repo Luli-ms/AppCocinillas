@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.snackbar.Snackbar
-import com.utad.appcocinillas.R
 import com.utad.appcocinillas.data.local.AppDatabase
 import com.utad.appcocinillas.data.remote.RetrofitClient
 import com.utad.appcocinillas.databinding.ActivityLoginBinding

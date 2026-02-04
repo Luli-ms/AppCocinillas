@@ -114,11 +114,4 @@ class DetailActivity : AppCompatActivity() {
         }
         return ingredients.toString().trimEnd()
     }
-
-    private fun showSnackBarMessage(message: String) {
-        Snackbar
-            .make(binding.root, message, Snackbar.LENGTH_SHORT)
-            .show()
-    }
-
 }

@@ -55,7 +55,11 @@ class MealsActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        viewModel.getMealsByCategory(selectedCategory)
+        if (selectedCategory == "Favoritos") {
+            viewModel.getUserFavMeals(email)
+        } else {
+            viewModel.getMealsByCategory(selectedCategory)
+        }
     }
 
     private fun setupUi() {
