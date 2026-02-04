@@ -31,6 +31,15 @@
         android:inputType="textPassword"
         android:layout_marginHorizontal="24dp"/>
 
+    <EditText
+        android:id="@+id/etConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/confirmar"
+        android:layout_marginTop="12dp"
+        android:inputType="textPassword"
+        android:layout_marginHorizontal="24dp"/>
+
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"

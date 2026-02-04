@@ -43,12 +43,19 @@ class RegisterActivity : AppCompatActivity() {
         binding.btnRegister.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
-            if (email.isEmpty() || password.isEmpty()) {
+            val confirm = binding.etConfirm.text.toString()
+            if (email.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
                 showSnackBarMessage("Por favor, rellene todos los campos")
             } else {
-                viewModel.registerUser(email, password)
-                showSnackBarMessage("El usuario se ha registrado correctamente!")
-                finish()
+                if (password != confirm) {
+                    showSnackBarMessage("Las contraseñas no coinciden")
+                } else {
+                    viewModel.registerUser(email, password)
+                    binding.etEmail.text.clear()
+                    binding.etPassword.text.clear()
+                    binding.etConfirm.text.clear()
+                    finish()
+                }
             }
         }
     }

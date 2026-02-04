@@ -60,6 +60,8 @@ class LoginActivity : AppCompatActivity() {
     private fun setupObservers() {
         viewModel.user.observe(this) { user ->
             if (user != null) {
+                binding.etEmail.text.clear()
+                binding.etPassword.text.clear()
                 navigateToMealsActivity(user.email)
             } else {
                 showSnackBarMessage("Credenciales incorrectas")
