@@ -68,6 +68,7 @@ class DetailActivity : AppCompatActivity() {
             .load(selectedMeal.strMealThumb)
             .into(binding.ivPoster)
         binding.tvTitle.text = selectedMeal.strMeal
+        binding.tvInstructions.text = selectedMeal.strInstructions
         binding.tvDescription.text = buildIngredientsString(selectedMeal)
         binding.btnFavorito.setOnClickListener {
             viewModel.toggleFavorite(email, selectedMeal)
