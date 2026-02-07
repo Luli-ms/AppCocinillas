@@ -13,4 +13,10 @@
     <string name="ingredientes">Ingredientes</string>
     <string name="receta">Receta</string>
     <string name="marcar">Botón de selección</string>
+    <string name="marisco">Marisco</string>
+    <string name="pollo">Pollo</string>
+    <string name="pasta">Pasta</string>
+    <string name="vegetariana">Vegetariana</string>
+    <string name="varias">Varias</string>
+    <string name="favoritos">Favoritos</string>
 </resources>

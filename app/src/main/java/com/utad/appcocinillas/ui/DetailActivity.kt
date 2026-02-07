@@ -1,6 +1,7 @@
 package com.utad.appcocinillas.ui
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -41,6 +42,10 @@ class DetailActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         email = intent.getStringExtra("email") ?: ""
         val idMeal = intent.getStringExtra("idMeal") ?: ""
         viewModel.getMealById(idMeal)
@@ -91,6 +96,16 @@ class DetailActivity : AppCompatActivity() {
         binding.btnFavorito.setOnClickListener {
             viewModel.toggleFavorite(email, selectedMeal)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+            else -> return false
+        }
+        return true
     }
 
     private fun buildIngredientsString(meal: Meal): String {

@@ -4,32 +4,32 @@
 
     <item
         android:id="@+id/seafood"
-        android:title="Marisco"
+        android:title="@string/marisco"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/chicken"
-        android:title="Pollo"
+        android:title="@string/pollo"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/pasta"
-        android:title="Pasta"
+        android:title="@string/pasta"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/vegetarian"
-        android:title="Vegetariana"
+        android:title="@string/vegetariana"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/miscellaneous"
-        android:title="Varias"
+        android:title="@string/varias"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/favoritos"
-        android:title="Favoritos"
+        android:title="@string/favoritos"
         app:showAsAction="never" />
 
 </menu>
