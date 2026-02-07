@@ -2,7 +2,6 @@ package com.utad.appcocinillas.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -70,8 +69,16 @@ class MealsActivity : AppCompatActivity() {
 
     private fun setupObservers() {
         viewModel.state.observe(this) { state ->
-            handleEmptyView(state.meals)
-            mealAdapter.submitList(state.meals)
+            if (state.isLoading) {
+                binding.progressBar.visibility = View.VISIBLE
+                binding.rvMeals.visibility = View.GONE
+                binding.tvEmpty.visibility = View.GONE
+            } else {
+                binding.progressBar.visibility = View.GONE
+                mealAdapter.submitList(state.meals)
+                handleEmptyView(state.meals)
+            }
+
             if (state.message.isNotEmpty()) showSnackBarMessage(state.message)
             this.title = selectedCategory
         }

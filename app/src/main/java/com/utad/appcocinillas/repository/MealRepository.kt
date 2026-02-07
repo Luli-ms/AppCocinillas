@@ -5,48 +5,59 @@ import com.utad.appcocinillas.data.remote.MealApiService
 import com.utad.appcocinillas.model.FavoritosUsuario
 import com.utad.appcocinillas.model.Meal
 import com.utad.appcocinillas.model.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class MealRepository(
     private val mealsDao: MealsDAO,
     private val apiService: MealApiService
 ) {
     suspend fun registrarUsuario(user: User) {
-        mealsDao.insertUser(user)
+        withContext(Dispatchers.IO) {
+            mealsDao.insertUser(user)
+        }
     }
 
     suspend fun autenticarUsuario(email: String, password: String): User? {
-        return mealsDao.getUserByEmailAndPassword(email, password)
+        return withContext(Dispatchers.IO) {
+            mealsDao.getUserByEmailAndPassword(email, password)
+        }
     }
 
     suspend fun getMealsByCategory(category: String): List<Meal> {
-        val mealsResponse = apiService.getMealsByCategory(category)
-        val meals = mealsResponse?.meals ?: emptyList()
-        return meals
+        return withContext(Dispatchers.IO) {
+            apiService.getMealsByCategory(category)?.meals ?: emptyList()
+        }
     }
 
     suspend fun marcarRecetaFavorita(email: String, meal: Meal) {
-        mealsDao.insertFavoriteMeal(meal)
-        mealsDao.insertFavoritosUsuario(FavoritosUsuario(email, meal.idMeal))
+        withContext(Dispatchers.IO) {
+            mealsDao.insertFavoriteMeal(meal)
+            mealsDao.insertFavoritosUsuario(FavoritosUsuario(email, meal.idMeal))
+        }
     }
 
     suspend fun desmarcarRecetaFavorita(email: String, meal: Meal) {
-        mealsDao.deleteFavoriteMealFromUser(email, meal.idMeal)
+        withContext(Dispatchers.IO) {
+            mealsDao.deleteFavoriteMealFromUser(email, meal.idMeal)
+        }
     }
 
     suspend fun esFavorito(idMeal: String, email: String): Boolean {
-        return mealsDao.getMealByIdUsuario(email, idMeal) != null
+        return withContext(Dispatchers.IO) {
+            mealsDao.getMealByIdUsuario(email, idMeal) != null
+        }
     }
 
     suspend fun obtenerRecetasFavoritas(email: String): List<Meal> {
-        return mealsDao.getFavoriteMealsByUser(email)
+        return withContext(Dispatchers.IO) {
+            mealsDao.getFavoriteMealsByUser(email)
+        }
     }
 
     suspend fun getMealById(idMeal: String): Meal? {
-        val mealsResponse = apiService.getMealById(idMeal)
-        val meals = mealsResponse?.meals ?: emptyList()
-        if (meals.isEmpty()) {
-            return null
+        return withContext(Dispatchers.IO) {
+            apiService.getMealById(idMeal)?.meals?.firstOrNull()
         }
-        return meals.first()
     }
 }

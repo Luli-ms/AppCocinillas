@@ -8,8 +8,9 @@
     <string name="imagen_desc">Receta</string>
     <string name="login">Login</string>
     <string name="no_hay_meals_en_este_momento">No hay recetas en este momento</string>
-    <string name="a_adir_a_favoritos">Añadir a favoritos</string>
-    <string name="btn_favorito_desmarcar">Eliminar de favoritos</string>
-    <string name="btn_favorito_marcar">Añadir a favoritos</string>
     <string name="confirmar">Confirmar contraseña</string>
+    <string name="instrucciones">Instrucciones</string>
+    <string name="ingredientes">Ingredientes</string>
+    <string name="receta">Receta</string>
+    <string name="marcar">Botón de selección</string>
 </resources>

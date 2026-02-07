@@ -69,6 +69,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToRegisterActivity() {
+        binding.etEmail.text.clear()
+        binding.etPassword.text.clear()
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }

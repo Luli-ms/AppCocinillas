@@ -1,6 +1,7 @@
 package com.utad.appcocinillas.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -52,14 +53,31 @@ class DetailActivity : AppCompatActivity() {
                 selectedMeal = meal
                 setupUi()
                 viewModel.checkIfIsFavorite(selectedMeal.idMeal, email)
+                this.title = selectedMeal.strMeal
+            } else {
+                binding.progressBar.visibility = View.GONE
+                showSnackBarMessage("No se ha podido cargar la receta")
             }
         }
         viewModel.esFavorito.observe(this) {
-            binding.btnFavorito.text = if (viewModel.esFavorito.value == true) {
-                getString(R.string.btn_favorito_desmarcar)
+            binding.btnFavorito.setImageResource(
+                if (viewModel.esFavorito.value == true) {
+                    R.drawable.ic_star_full
+                } else {
+                    R.drawable.ic_star_border
+                }
+            )
+        }
+        viewModel.state.observe(this) { state ->
+            if (state.isLoading) {
+                binding.progressBar.visibility = View.VISIBLE
+                binding.scrollView.visibility = View.GONE
             } else {
-                getString(R.string.btn_favorito_marcar)
+                binding.progressBar.visibility = View.GONE
+                binding.scrollView.visibility = View.VISIBLE
             }
+
+            if (state.message.isNotEmpty()) showSnackBarMessage(state.message)
         }
     }
 
@@ -105,13 +123,18 @@ class DetailActivity : AppCompatActivity() {
             val measureStr = measure?.trim()
 
             if (ingredientStr?.isNotEmpty() == true) {
-                if (measureStr?.isNotEmpty() == true) {
+                if (measureStr?.isNotEmpty() == true)
                     ingredients.append("• $measureStr $ingredientStr\n")
-                } else {
+                else
                     ingredients.append("• $ingredientStr\n")
-                }
             }
         }
         return ingredients.toString().trimEnd()
+    }
+
+    private fun showSnackBarMessage(message: String) {
+        Snackbar
+            .make(binding.root, message, Snackbar.LENGTH_SHORT)
+            .show()
     }
 }
